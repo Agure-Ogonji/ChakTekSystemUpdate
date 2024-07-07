@@ -1,0 +1,78 @@
+﻿@using System.Net.Http
+@using System.Net.Http.Json
+@using BaseLibrary.Entities
+@using Client.ApplicationState
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.AspNetCore.Components.WebAssembly.Http
+@using Microsoft.JSInterop
+@using Client
+@using Client.Layout
+
+@using BaseLibrary.DTOs
+@using ClientLibrary.Helpers
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Authorization
+@using ClientLibrary.Services.Contracts
+@using Syncfusion.Blazor.Popups
+
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.DropDowns
+
+@using Client.Pages.OtherPages.OvertimePages
+@using Client.Pages.OtherPages.VacationPages
+@using Client.Pages.OtherPages.DoctorPages
+@using Client.Pages.OtherPages.SanctionPages
+@using Client.Pages.ContentPage.EmployeePage
+@using Client.Pages.ContentPage.UserPages
+@using Client.Pages.ContentPage.LocationPages
+@using Client.Pages.ContentPage.DepartmentPage
+@using Client.Pages.OtherPages
+
+@inject AllStates departmentState
+
+
+
+
+@inject NavigationManager NavManager
+
+@inject AuthenticationStateProvider AuthStateProvider
+
+@* AUTHENTICATION *@
+@inject IUserAccountService accountService
+
+@* NAVBAR TABS COMMUNICATION STATES HANDLING *@
+@inject AllStates allStates
+
+@* SYNCFUSION DIALOG SERVICE *@
+@inject SfDialogService dialogService
+
+
+@* GENERAL DEPARTMENTS, DEPARTMENTS AND BRANCHES *@
+@inject IGenericServiceInterface<GeneralDepartment> generalDepartmentService
+@inject IGenericServiceInterface<Department> departmentService
+@inject IGenericServiceInterface<Branch> branchService
+
+@* COUNTRY, CITY AND TOWN *@
+@inject IGenericServiceInterface<Country> countryService
+@inject IGenericServiceInterface<City> cityService
+@inject IGenericServiceInterface<Town> townService
+
+
+@* OTHER TABLES *@
+@inject IGenericServiceInterface<Overtime> overtimeService
+@inject IGenericServiceInterface<OvertimeType> overtimeTypeService
+
+@inject IGenericServiceInterface<Sanction> sanctionService
+@inject IGenericServiceInterface<SanctionType> sanctionTypeService
+
+@inject IGenericServiceInterface<Vacation> vacationService
+@inject IGenericServiceInterface<VacationType> vacationTypeService
+
+@inject IGenericServiceInterface<Doctor> doctorService
+
+@* EMPLOYEE *@
+@inject IGenericServiceInterface<Employee> employeeService
+

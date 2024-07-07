@@ -1,0 +1,60 @@
+﻿<SfDialog Width="350px" IsModal="true" ShowCloseIcon="true" @bind-Visible="IsVisible">
+	<DialogEvents OnOpen="OpenDialog"></DialogEvents>
+	<DialogTemplates>
+		<Header>@Title Vacation Type</Header>
+		<Content>
+			<EditForm Model="VacationType" Enhance OnSubmit="Save">
+				<div class="card border-success">
+					<div class="card-body">
+						<div class="form-group">
+							<label class="form-label">Employee ID</label>
+							<InputText @bind-Value="VacationType.Name" class="form-control" />
+						</div>
+
+					</div>
+				</div>
+			</EditForm>
+		</Content>
+	</DialogTemplates>
+
+	<DialogButtons>
+		<DialogButton Content="SAVE" Type="ButtonType.Submit" IsPrimary="true" OnClick="Save" />
+	</DialogButtons>
+</SfDialog>
+
+@code {
+
+	[Parameter] public VacationType VacationType { get; set; } = new();
+	[Parameter] public EventCallback<VacationType> HandleSaveOperationEvent { get; set; }
+
+	private bool IsVisible { get; set; } = false;
+	public string Title { get; set; } = "Add";
+	private async void Save()
+	{
+		if (string.IsNullOrEmpty(VacationType.Name))
+			await dialogService.AlertAsync("YOU NEED TO PROVIDE THE VACATIONTYPE NAME", "ALERT!");
+		else
+			await HandleSaveOperationEvent.InvokeAsync(VacationType);
+	}
+	public void OpenDialog()
+	{
+		IsVisible = true;
+		StateHasChanged();
+	}
+	public void CloseDialog()
+	{
+		IsVisible = false;
+		StateHasChanged();
+	}
+
+	// public void OnValueChange(ChangeEventArgs<string, OvertimeType> args)
+	// {
+	// 	ItemModel.OvertimeTypeId = int.Parse(args.Value.ToString());
+	// }
+
+	public void ChangeTitle(string title)
+	{
+		Title = title;
+	}
+
+}
